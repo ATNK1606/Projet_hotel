@@ -45,7 +45,7 @@ def main_menu ():
     print("--------------------------------------------------")
     print("     BIENVENUE DANS NOTRE APP DE RESERVATION      ")
     print("--------------------------------------------------")
-    print("     1.VOIR NOS TOUTES LES OFFRES")
+    print("     1.VOIR TOUTES LES OFFRES")
     print("     2.QUITTER")
     print("--------------------------------------------------")
     choix = int(input("Veuillez choisir une option : "))
@@ -74,7 +74,7 @@ def menu_offres(choix) :
         print("1.OFFRE STANDARD (CHAMBRE INDIVIDUELLE) | QUANTITÉ : 3")
         print("2.OFFRE STANDARD+ (CHAMBRE DOUBLE) | QUANTITÉ : 2")
         print("3.OFFRE SUITE ROYALE | QUANTITÉ : 3")
-        print("4.OFFRE STUDIO | QUANTITÉ : 3")
+        print("4.OFFRE STUDIO | QUANTITÉ : 2")
         print("0.RETOUR")
         print("--------------------------------------------------")
         choix_offre = int(input("Veuillez choisir une offre : "))
@@ -150,7 +150,7 @@ def affichage_offre(choix_offre) :
         if retour == 0 :
             menu_offres(1)
         elif retour == 1 : 
-            reservation("STUDIO",offre_studio,3) ##################
+            reservation("STUDIO",offre_studio,2) ##################
     else : 
         os.system('cls')
         main_menu()
@@ -167,19 +167,32 @@ def affichage (offre) :
 def reservation (titre, type_, quantite) : 
     nombre = 4
     chambre = []
+    affichage_titre(titre)
+    affichage(type_)
+    print("Prix de la nuit : 18 euros")
+    print("Il y a ", quantite," chambres disponibles pour cette offre !" )
+    nombre = int(input("Veuillez saisir le nombre de chambre : "))
     while nombre > quantite or nombre <= 0 :
         affichage_titre(titre)
         affichage(type_)
+        print("Prix de la nuit : 18 euros")
+        print("--------------------------------------------------") 
+        print("Nombre de chambre insuffisant !!")
         print("Il y a ", quantite," chambres disponibles pour cette offre !" )
         nombre = int(input("Veuillez saisir le nombre de chambre : "))
+        print("--------------------------------------------------") 
     for i in range(nombre) : 
         nuit = 0
         while nuit <= 0 : 
             affichage_titre(titre)
             affichage(type_)
+            print("Prix de la nuit : 18 euros")
             nuit = int(input("Veuillez choisir le nombre de nuits pour la chambre : "))
+        print("--------------------------------------------------")
         print("Attention pour une heure d'arrivée hors 13h-17h une pénalité de 15 euros ")
+        print("Veuillez respecter le format 14 pour 14h-15h ou 16 pour 16h-17h")
         heure=int(input("Veuillez saisir l'heure d'arrivée : "))
+        print("--------------------------------------------------")
         if heure  >= 13 and heure <= 17 : 
             prix  = 18 * nuit 
         else : 
@@ -190,20 +203,33 @@ def reservation (titre, type_, quantite) :
 def reservation_d (titre, type_, quantite) : 
     nombre = 4
     chambre = []
+    affichage_titre(titre)
+    affichage(type_)
+    print("Prix de la nuit : 18 euros")
+    print("Il y a ", quantite," chambres disponibles pour cette offre !" )
+    nombre = int(input("Veuillez saisir le nombre de chambre : "))
     while nombre > quantite or nombre < 0 :
         affichage_titre(titre)
         affichage(type_)
+        print("Prix de la nuit : 18 euros")
+        print("--------------------------------------------------") 
+        print("Nombre de chambre insuffisant !!")
         print("Il y a ", quantite," chambres disponibles pour cette offre !" )
         nombre = int(input("Veuillez saisir le nombre de chambre : "))
+        print("--------------------------------------------------") 
     for i in range(nombre) : 
         nuit = 0
         while nuit < 2 : 
             affichage_titre(titre)
             affichage(type_)
+            print("Prix de la nuit : 18 euros")
             print("Pour l'offre : ",titre," Il faut reserver au minimum 2 nuits !" )
             nuit = int(input("Veuillez choisir le nombre de nuits pour la chambre : "))
+        print("--------------------------------------------------")
         print("Attention pour une heure d'arrivée hors 13h-17h une pénalité de 15 euros ")
+        print("Veuillez respecter le format 14 pour 14h-15h ou 16 pour 16h-17h")
         heure=int(input("Veuillez saisir l'heure d'arrivée : "))
+        print("--------------------------------------------------")
         if heure  >= 13 and heure <= 17 : 
             prix  = 18 * nuit 
         else : 
@@ -217,7 +243,6 @@ def affichage_reservation (chambre) :
         print("--------------------------------------------------")
         for i in range(len(chambre)) : 
             print("Facturation de la reservation",(i+1))
-            chambre[i].afficher_chambre()
             chambre[i].afficher_prix()
             chambre[i].afficher_nuits()
             chambre[i].afficher_heure()
